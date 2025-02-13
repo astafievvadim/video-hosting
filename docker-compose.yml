@@ -1,6 +1,6 @@
 services:
   auth_db:
-    container_name: vh_pg_sql
+    container_name: vh_auth_pg_sql
     image: postgres
     environment:
       POSTGRES_USER: auth
@@ -11,6 +11,22 @@ services:
       - postgres:/data/postgres
     ports:
       - "5432:5432" # external port that we will be using : container port
+    networks:
+      - videohosting-net
+    restart: unless-stopped
+
+  user_db:
+    container_name: vh_user_pg_sql
+    image: postgres
+    environment:
+      POSTGRES_USER: user_db
+      POSTGRES_PASSWORD: user_db
+      PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: user_db
+    volumes:
+      - postgres:/data/postgres
+    ports:
+      - "5433:5432" # external port that we will be using : container port
     networks:
       - videohosting-net
     restart: unless-stopped
