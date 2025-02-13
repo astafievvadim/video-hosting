@@ -9,10 +9,18 @@ public class JwtService {
     @Value("${application.security.jwt.secret-key}")
     private String secretKey;
     @Value("${application.security.jwt.expiration}")
-    private long jwtExpiration;
+    private Long jwtExpiration;
     @Value("${application.security.jwt.refresh-token.expiration}")
-    private long refreshExpiration;
+    private Long refreshExpiration;
 
-    //***//
+    /*
+
+    _____________
+    | put       |
+    | something |
+    |   here... |
+    -------------
+
+    */
 
 }
