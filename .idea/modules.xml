@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/services/auth-service/auth-service.iml" filepath="$PROJECT_DIR$/services/auth-service/auth-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/config-server/config-server.iml" filepath="$PROJECT_DIR$/services/config-server/config-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/services/discovery-service/discovery-service.iml" filepath="$PROJECT_DIR$/services/discovery-service/discovery-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/services/user-service/user-service.iml" filepath="$PROJECT_DIR$/services/user-service/user-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/video-hosting.iml" filepath="$PROJECT_DIR$/.idea/video-hosting.iml" />
     </modules>
   </component>

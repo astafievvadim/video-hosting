@@ -1,13 +1,14 @@
 services:
-  postgres:
+  auth_db:
     container_name: vh_pg_sql
     image: postgres
     environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: user
+      POSTGRES_USER: auth
+      POSTGRES_PASSWORD: auth
       PGDATA: /var/lib/postgresql/data
+      POSTGRES_DB: auth
     volumes:
-      - /var/lib/postgresql/data
+      - postgres:/data/postgres
     ports:
       - "5432:5432" # external port that we will be using : container port
     networks:
