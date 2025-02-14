@@ -15,14 +15,14 @@ services:
       - videohosting-net
     restart: unless-stopped
 
-  user_db:
+  profile_db:
     container_name: vh_user_pg_sql
     image: postgres
     environment:
-      POSTGRES_USER: user_db
-      POSTGRES_PASSWORD: user_db
+      POSTGRES_USER: profile
+      POSTGRES_PASSWORD: profile
       PGDATA: /var/lib/postgresql/data
-      POSTGRES_DB: user_db
+      POSTGRES_DB: profile
     volumes:
       - postgres:/data/postgres
     ports:

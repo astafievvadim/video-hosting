@@ -1,4 +1,4 @@
-package com.astafievvadim.userservice.user;
+package com.astafievvadim.profileservice.profile;
 
 import jakarta.persistence.Id;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.astafievvadim</groupId>
-	<artifactId>user-service</artifactId>
+	<artifactId>profile-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>user-service</name>
+	<name>profile-service</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
