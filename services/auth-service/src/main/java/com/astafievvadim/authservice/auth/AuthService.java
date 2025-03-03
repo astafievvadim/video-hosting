@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class AuthService {
 
-    private AuthRepo authRepo;
+    private UserRepo userRepo;
 
     @Autowired
-    public AuthService(AuthRepo authRepo) {
-        this.authRepo = authRepo;
+    public AuthService(UserRepo userRepo) {
+        this.userRepo = userRepo;
     }
 
 
