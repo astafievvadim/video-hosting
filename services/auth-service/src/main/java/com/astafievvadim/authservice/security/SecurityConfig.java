@@ -10,6 +10,7 @@ import org.springframework.security.authentication.dao.DaoAuthenticationProvider
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.SessionManagementConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -34,13 +35,16 @@ public class SecurityConfig {
 
                 .userDetailsService(userDetailsService())
                 .authorizeHttpRequests((authorize) -> authorize
+                                .requestMatchers("/auth/csrf").permitAll()
                                 .anyRequest().permitAll()
                 )
                 .formLogin(Customizer.withDefaults())
                 .httpBasic(Customizer.withDefaults())
                 .csrf((csrf) -> csrf
+                        .ignoringRequestMatchers("/auth/csrf")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 );
+                //.csrf(AbstractHttpConfigurer::disable);
         return http.build();
     }
 

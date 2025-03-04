@@ -1,10 +1,9 @@
-package com.astafievvadim.authservice.auth;
+package com.astafievvadim.authservice.auth.model;
 
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.springframework.security.core.GrantedAuthority;
 
 
 import java.io.Serializable;
@@ -12,21 +11,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "custom_users")
+@Table(name = "users_custom")
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    @Column(name="id", nullable=false, updatable=false)
     private Long id;
+    @Column(name="username")
     private String username;
     @JsonIgnore
+    @Column(name="password")
     private String password;
+
+    @Column(name="email")
     private String email;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(  name = "custom_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @JoinTable(name = "custom_roles")
     private List<Role> roles = new ArrayList<>();
 
     public User() {

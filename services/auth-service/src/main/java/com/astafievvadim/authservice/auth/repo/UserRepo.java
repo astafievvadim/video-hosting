@@ -1,5 +1,6 @@
-package com.astafievvadim.authservice.auth;
+package com.astafievvadim.authservice.auth.repo;
 
+import com.astafievvadim.authservice.auth.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.io.Serializable;

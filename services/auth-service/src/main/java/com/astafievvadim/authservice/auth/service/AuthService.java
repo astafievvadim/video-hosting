@@ -1,5 +1,6 @@
-package com.astafievvadim.authservice.auth;
+package com.astafievvadim.authservice.auth.service;
 
+import com.astafievvadim.authservice.auth.repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

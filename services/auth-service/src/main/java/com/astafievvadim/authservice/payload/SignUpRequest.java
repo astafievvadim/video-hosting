@@ -5,7 +5,7 @@ import org.springframework.lang.NonNull;
 public class SignUpRequest {
 
     @NonNull
-    private String firstName;
+    private String nickname;
 
     @NonNull
     private String username;
@@ -17,8 +17,8 @@ public class SignUpRequest {
     @NonNull
     private String email;
 
-    public SignUpRequest(@NonNull String firstName, @NonNull String username, @NonNull String password, String matchingPassword, @NonNull String email) {
-        this.firstName = firstName;
+    public SignUpRequest(@NonNull String nickname, @NonNull String username, @NonNull String password, String matchingPassword, @NonNull String email) {
+        this.nickname = nickname;
         this.username = username;
         this.password = password;
         this.matchingPassword = matchingPassword;
@@ -29,12 +29,12 @@ public class SignUpRequest {
     }
 
     @NonNull
-    public String getFirstName() {
-        return firstName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setFirstName(@NonNull String firstName) {
-        this.firstName = firstName;
+    public void setNickname(@NonNull String nickname) {
+        this.nickname = nickname;
     }
 
     @NonNull

@@ -1,12 +1,11 @@
-package com.astafievvadim.authservice.auth;
+package com.astafievvadim.authservice.auth.controller;
 
-import com.astafievvadim.authservice.payload.SignOutRequest;
+import com.astafievvadim.authservice.auth.model.User;
+import com.astafievvadim.authservice.auth.service.UserService;
 import com.astafievvadim.authservice.payload.SignInRequest;
 import com.astafievvadim.authservice.payload.SignUpRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,13 +30,15 @@ public class AuthController  {
     private UserService userService;
 
     @PostMapping("/signup")
-    public ResponseEntity<?> signUp(@RequestBody SignUpRequest sign) {
+    public ResponseEntity<?> signUp(@RequestBody SignUpRequest sup) {
+
         try {
-            User registered = userService.registerNewUserAccount(sign);
+            userService.registerNewUserAccount(sup);
+            return new ResponseEntity<>("aok", HttpStatus.OK);
         } catch (RuntimeException e) {
             return new ResponseEntity<>("err", HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("aok", HttpStatus.OK);
+
     }
     @PostMapping("/login")
     public ResponseEntity<?> signIn(@RequestBody SignInRequest sir){
@@ -46,26 +46,24 @@ public class AuthController  {
         Authentication auth = null;
         try{
             auth = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(sir.getUsername(), sir.getPassword()));
+            SecurityContextHolder.getContext().setAuthentication(auth);
+
+            User a = userService.getUserByUsername(sir.getUsername());
+            return ResponseEntity.ok(a);
+
         } catch (BadCredentialsException e){
-            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        SecurityContextHolder.getContext().setAuthentication(auth);
-        return ResponseEntity.ok("Signed in successfully");
     }
     @PostMapping("/logout")
     public ResponseEntity<?> signOut(HttpServletRequest request, HttpServletResponse response){
         Authentication auth = null;
         try{
             auth = SecurityContextHolder.getContext().getAuthentication();
+            return new ResponseEntity<>("asss", HttpStatus.OK);
         } catch (BadCredentialsException e){
             new SecurityContextLogoutHandler().logout(request, response, auth);
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>("asss", HttpStatus.OK);
-    }
-
-    @GetMapping("/csrf-token")
-    public CsrfToken getCsrfToken(HttpServletRequest request){ // CsrfToken provide by spring security.
-        //generate token
-        return (CsrfToken)request.getAttribute("_csrf");
     }
 }
