@@ -9,6 +9,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -65,5 +67,11 @@ public class AuthController  {
             new SecurityContextLogoutHandler().logout(request, response, auth);
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @GetMapping("/secured")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<?> TEST(){
+        return new ResponseEntity<>("You can see this", HttpStatus.OK);
     }
 }
